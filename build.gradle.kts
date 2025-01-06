@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation ("org.seleniumhq.selenium:selenium-java:4.27.0")
-    testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.11.4")
-    testImplementation ("org.testng:testng:7.8.0")
-    testImplementation ("io.github.bonigarcia:webdrivermanager:5.6.2")
+    implementation(platform("org.junit:junit-bom:5.10.0"))
+    implementation("org.junit.jupiter:junit-jupiter")
+    implementation ("org.seleniumhq.selenium:selenium-java:4.27.0")
+    implementation ("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    implementation ("org.testng:testng:7.8.0")
+    implementation ("io.github.bonigarcia:webdrivermanager:5.6.2")
 
 }
 

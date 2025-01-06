@@ -1,64 +1,78 @@
 package com.pages;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
+
 public class mainPage extends BasePage {
-    private By logo = By.cssSelector("a.logo");
-    private By contactUsButton = By.className(".contact-us-main-menu-button");
-    private By firstNameInput = By.name("firstname");
-    private By lastNameInput = By.name("lastname");
-    private By emailInput = By.name("email");
-    private By companyInput = By.name("company");
-    private By contactTypeCombo = By.name("contact_type");
-    private By messageInput = By.name("message");
-    private By submitButton = By.xpath("//input[@type='submit' and @value='Submit']");
-    private By requiredMessageName = By.xpath("//div[contains(@class, 'hs_firstname')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
-    private By requiredMessageLastName = By.xpath("//div[contains(@class, 'hs_lastname')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
-    private By requiredMessageEmail = By.xpath("//div[contains(@class, 'hs_email')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
-    private By requiredMessageCompany = By.xpath("//div[contains(@class, 'hs_company')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
-    private By requiredMessageContactType = By.xpath("//div[contains(@class, 'hs_contact_type')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
-    private By requiredMessageMessage = By.xpath("//div[contains(@class, 'hs_message ')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By logo = By.cssSelector("a.logo");
+    private final By contactUsButton = By.xpath("//li//a[contains(@class, 'link-label') and text()='Contact Us']");
+    private final By firstNameInput = By.xpath("//input[@name='firstname' and @type='text']");
+    private final By lastNameInput = By.xpath("//input[@name='lastname' and @type='text']");
+    private final By emailInput = By.xpath("//input[@name='email' and @type='email']");
+    private final By companyInput = By.xpath("//input[@name='company' and @type='text']");
+    private final By contactTypeSelector = By.xpath("//select[@name='contact_type']");
+    private final By messageInput = By.xpath("//textarea[@name='message']");
+    private final By submitButton = By.xpath("//div[@class='actions']//input[@type='submit']");
+    private final By requiredMessageName = By.xpath("//div[contains(@class, 'hs_firstname')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By requiredMessageLastName = By.xpath("//div[contains(@class, 'hs_lastname')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By requiredMessageEmail = By.xpath("//div[contains(@class, 'hs_email')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By requiredMessageCompany = By.xpath("//div[contains(@class, 'hs_company')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By requiredMessageContactType = By.xpath("//div[contains(@class, 'hs_contact_type')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
+    private final By requiredMessageMessage = By.xpath("//div[contains(@class, 'hs_message ')]//ul[contains(@class, 'hs-error-msgs')]//li/label[text()='Please complete this required field.']");
 
     public mainPage(WebDriver driver) {
         super(driver);
     }
-    public Boolean fieldIsDisplayed(String fieldToCheck){
-        return switch (fieldToCheck) {
-            case "firstName" -> {
+    public boolean fieldIsDisplayed(String fieldToCheck) {
+        switch (fieldToCheck) {
+            case "firstName":
                 checkVisibility(firstNameInput);
-                yield true;
-            }
-            case "lastName" -> {
+                return true;
+            case "lastName":
                 checkVisibility(lastNameInput);
-                yield true;
-            }
-            case "email" -> {
+                return true;
+            case "email":
                 checkVisibility(emailInput);
-                yield true;
-            }
-            case "company" -> {
+                return true;
+            case "company":
                 checkVisibility(companyInput);
-                yield true;
-            }
-            case "message" -> {
+                return true;
+            case "message":
                 checkVisibility(messageInput);
-                yield true;
-            }
-            case "submit" -> {
+                return true;
+            case "error-firstName":
+                checkVisibility(requiredMessageName);
+                return true;
+            case "error-lastName":
+                checkVisibility(requiredMessageLastName);
+                return true;
+            case "error-email":
+                checkVisibility(requiredMessageEmail);
+                return true;
+            case "error-company":
+                checkVisibility(requiredMessageCompany);
+                return true;
+            case "error-contact":
+                checkVisibility(requiredMessageContactType);
+                return true;
+            case "error-message":
+                checkVisibility(requiredMessageMessage);
+                return true;
+            case "submit":
                 checkVisibility(submitButton);
-                yield true;
-            }
-            case "logo" -> {
+                return true;
+            case "logo":
                 checkVisibility(logo);
-                yield true;
-            }
-            default -> false;
-        };
+                return true;
+            default:
+                return false;
+        }
     }
+
     public void checkVisibility(By selector) {
         try {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
@@ -77,32 +91,36 @@ public class mainPage extends BasePage {
         usernameElement.sendKeys(name);
     }
     public void enterLastName(String lastName){
-        WebElement usernameElement = wait.until(ExpectedConditions.elementToBeClickable(lastNameInput));
-        usernameElement.clear();
-        usernameElement.sendKeys(lastName);
+        WebElement lastNameElement = wait.until(ExpectedConditions.elementToBeClickable(lastNameInput));
+        lastNameElement.clear();
+        lastNameElement.sendKeys(lastName);
     }
     public void enterEmail(String email){
-        WebElement usernameElement = wait.until(ExpectedConditions.elementToBeClickable(emailInput));
-        usernameElement.clear();
-        usernameElement.sendKeys(email);
+        WebElement emailElement = wait.until(ExpectedConditions.elementToBeClickable(emailInput));
+        emailElement.clear();
+        emailElement.sendKeys(email);
     }
     public void enterCompany(String company){
-        WebElement usernameElement = wait.until(ExpectedConditions.elementToBeClickable(companyInput));
-        usernameElement.clear();
-        usernameElement.sendKeys(company);
+        WebElement companyElement = wait.until(ExpectedConditions.elementToBeClickable(companyInput));
+        companyElement.clear();
+        companyElement.sendKeys(company);
     }
     public void selectContactType(){
-//        WebElement usernameElement = wait.until(ExpectedConditions.elementToBeClickable(firstNameInput));
-//        usernameElement.clear();
-//        usernameElement.sendKeys(name);
+        WebElement contactElement = wait.until(ExpectedConditions.presenceOfElementLocated(contactTypeSelector));
+        Select contactType = new Select(contactElement);
+        contactType.selectByIndex(1);
     }
     public void enterMessage(String message){
-        WebElement usernameElement = wait.until(ExpectedConditions.elementToBeClickable(messageInput));
-        usernameElement.clear();
-        usernameElement.sendKeys(message);
+        WebElement messageElement = wait.until(ExpectedConditions.elementToBeClickable(messageInput));
+        messageElement.clear();
+        messageElement.sendKeys(message);
     }
-    public void submitForm(){
-        WebElement loginButtonElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
-        loginButtonElement.click();
+
+    public void submitForm() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebElement submitButtonElement = wait.until(ExpectedConditions.elementToBeClickable(submitButton));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", submitButtonElement);
+        submitButtonElement.click();
     }
 }
