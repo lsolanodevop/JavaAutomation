@@ -61,8 +61,8 @@ public class productPage extends BasePage {
     public void logoutSite(){
         this.ClickOnElement(this.menuButton);
         this.ClickOnElement(this.logout);
-        String succesfullLogout = driver.getCurrentUrl();
-        Assert.assertEquals(succesfullLogout,"https://www.saucedemo.com/");
+        String succesfulLogout = driver.getCurrentUrl();
+        Assert.assertEquals(succesfulLogout,"https://www.saucedemo.com/");
     }
 
     public void validatePrices(){
@@ -80,21 +80,17 @@ public class productPage extends BasePage {
         }
 
     public void placerOrderButton(){
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(placerOrderButton));
-        element.click();
+        this.ClickOnElement(placerOrderButton);
     }
 
     public void backToProducts(){
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(backToProducts));
-        element.click();
+        this.ClickOnElement(backToProducts);
     }
     public void goToCheckout(){
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(goToCheckout));
-        element.click();
+        this.ClickOnElement(goToCheckout);
     }
     public void goToPayment(){
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(continueButton));
-        element.click();
+        this.ClickOnElement(continueButton);
     }
     public int validateMandatoryFields(){
         List<WebElement> errorElements = driver.findElements(errorSelector);
@@ -119,17 +115,14 @@ public class productPage extends BasePage {
     }
 
     public void addToCart(){
-        WebElement elementToBeClicked = wait.until(ExpectedConditions.elementToBeClickable(addToCartSelector));
-        elementToBeClicked.click();
+        this.ClickOnElement(addToCartSelector);
     }
 
     public void goToCart(){
-        WebElement elementToBeClicked = wait.until(ExpectedConditions.elementToBeClickable(goToCartSelector));
-        elementToBeClicked.click();
+        this.ClickOnElement(goToCartSelector);
     }
     public void continueShopping(){
-        WebElement elementToBeClicked = wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton));
-        elementToBeClicked.click();
+        this.ClickOnElement(continueShoppingButton);
     }
 
     public void selectFilter(String filter){
