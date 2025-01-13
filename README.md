@@ -8,11 +8,12 @@ src/                  // Project source code.
 │           └── com/       // Java packages.
 │               └── pages/    // Page Object Model (POM) classes.
 │                   ├── BasePage.java // Base class for POMs.
-│                   └── mainPage.java // Specific POM for the main page.
+│                   └── productPage.java // Specific POM for the main page.
 │               └── tests/    // Test classes.
-│                   └── MainTest.java // Class containing the tests.
+│                   └── ProductTest.java // Class containing the tests.
+
 Execution: 
 Download the code
 Ensure you have Gradle and Java in your machine
 Build it
-Go to the MainTest and execute the test. The execution report will be in the console
+Go to the ProductTest and execute the test. The execution report will be in the console
